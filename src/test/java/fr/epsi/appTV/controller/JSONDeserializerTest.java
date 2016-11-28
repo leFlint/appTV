@@ -53,7 +53,7 @@ public class JSONDeserializerTest {
         listeSeries = jsonDeserializer.rechercheParActeur("Winona Ryder");
         assertThat(listeSeries.contains("Stranger Things"));
 
-    }gi
+    }
 
     @Test
     public void tri() throws JsonParseException, JsonMappingException, Exception  {

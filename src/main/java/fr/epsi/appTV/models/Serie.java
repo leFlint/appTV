@@ -1,4 +1,4 @@
-package fr.epsi.appTV;
+package fr.epsi.appTV.models;
 
 
 

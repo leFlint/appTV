@@ -1,16 +1,19 @@
-package fr.epsi.appTV;
+package fr.epsi.appTV.services;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
+import fr.epsi.appTV.AppTVApplication;
+import fr.epsi.appTV.models.Acteur;
+import fr.epsi.appTV.models.Data;
+import fr.epsi.appTV.models.Serie;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,18 +24,19 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 @RestController
+@RequestMapping("/api")
 public class JSONDeserializer {
 
     static Data DATA = null;
 
     public JSONDeserializer() throws JsonParseException, JsonMappingException, IOException {
         ObjectMapper mapper = new ObjectMapper();
-        URL jsonResourceURL = AppTVApplication.class.getResource("/data/series.json");
-        File jsonFile = new File(jsonResourceURL.getFile());
-        DATA = mapper.readValue(jsonFile, Data.class);
+        InputStream jsonResourceURL = AppTVApplication.class.getResourceAsStream("/data/series.json");
+        DATA = mapper.readValue(jsonResourceURL, Data.class);
     }
 
-    @RequestMapping("/rechercheParNom")
+
+    @RequestMapping("/rechercheParTitre")
     public List<Serie> rechercheParNom(@RequestParam(required = true) String nom) {
         List<Serie> resultat = new ArrayList();
         for (Serie serie : DATA.getSeries()) {

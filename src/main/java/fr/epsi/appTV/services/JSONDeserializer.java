@@ -44,8 +44,8 @@ public class JSONDeserializer {
     }
 
     @RequestMapping("/getGenres")
-    public Set<String> getGenres() {
-        Set<String> resultat = new HashSet();
+    public List<String> getGenres() {
+        List<String> resultat = new ArrayList();
         for (Serie serie : DATA.getSeries()) {
             for (String g : serie.getGenre()) {
                 resultat.add(g);
